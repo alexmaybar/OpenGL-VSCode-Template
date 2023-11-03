@@ -17,11 +17,27 @@ const char *fragmentShaderSource = "#version 330 core\n"
                                    "out vec4 FragColor;\n"
                                    "void main()\n"
                                    "{\n"
-                                   "   FragColor = vec4(0.8f, 0.3f, 0.02f, 1.0f);\n"
+                                   "   FragColor = vec4(1.0f, 0.0f, 0.00f, 1.0f);\n"
                                    "}\n\0";
+
+const int WIDTH = 1280;
+const int HEIGHT = 720;
+
+// Lock the view port into the specified aspect ratio
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
-    glViewport(0, 0, width, height);
+    float ratio = (float)HEIGHT / (float)WIDTH;
+    int scaledHeight = (int)(ratio * width);
+
+    if (scaledHeight >= height)
+    {
+        int scaledWidth = (int)((1 / ratio) * height);
+        glViewport(0, 0, scaledWidth, height);
+    }
+    else
+    {
+        glViewport(0, 0, width, scaledHeight);
+    }
 }
 
 int main()
@@ -38,7 +54,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     GLFWwindow *window;
-    window = glfwCreateWindow(800, 600, "Demo", NULL, NULL);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "My Window", NULL, NULL);
     if (window == NULL)
     {
         cout << "Failed to open GLFW window" << endl;
@@ -52,7 +68,7 @@ int main()
         return -1;
     }
 
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, WIDTH, HEIGHT);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     // Create Vertex Shader Object and get its reference
