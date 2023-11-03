@@ -1,9 +1,11 @@
 #include <iostream>
 #include <math.h>
-#include <glad/glad.h>
+#include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
+#include <GLM/common.hpp>
+#include <GLM/vec3.hpp>
 
-using namespace std;
+using namespace glm;
 
 // Vertex Shader source code
 const char *vertexShaderSource = "#version 330 core\n"
@@ -44,7 +46,7 @@ int main()
 {
     if (!glfwInit())
     {
-        cout << "Failed to initialize GLFW" << endl;
+        std::cout << "Failed to initialize GLFW" << std::endl;
         return -1;
     }
 
@@ -57,14 +59,14 @@ int main()
     window = glfwCreateWindow(WIDTH, HEIGHT, "My Window", NULL, NULL);
     if (window == NULL)
     {
-        cout << "Failed to open GLFW window" << endl;
+        std::cout << "Failed to open GLFW window" << std::endl;
         return -1;
     }
     glfwMakeContextCurrent(window);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        cout << "Failed to initialize GLAD" << endl;
+        std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
 
@@ -97,6 +99,15 @@ int main()
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
+    // vec3 test = vec3(1.0f, 23.0f, 1.0f);
+    // std::cout << test.y << std::endl;
+
+    // vec3 buffer_data[9] = {
+    //     vec3(-3.5, 4.0, -4.0),
+    //     vec3(0.0, 4.0, -4.0),
+    //     vec3(3.5, 4.0, -4.0),
+    // };
+
     // Vertices coordinates
     GLfloat vertices[] =
         {
@@ -119,6 +130,9 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // Introduce the vertices into the VBO
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    // printf("size of vertices: %lu\n", sizeof(vertices));
+    // printf("size of buffer_data: %lu\n", sizeof(buffer_data));
 
     // Configure the Vertex Attribute so that OpenGL knows how to read the VBO
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
