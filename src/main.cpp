@@ -1,7 +1,10 @@
 #include <iostream>
 #include <math.h>
+#include <vector>
+
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
+
 #include <GLM/common.hpp>
 #include <GLM/vec3.hpp>
 
@@ -102,19 +105,12 @@ int main()
     // vec3 test = vec3(1.0f, 23.0f, 1.0f);
     // std::cout << test.y << std::endl;
 
-    // vec3 buffer_data[9] = {
-    //     vec3(-3.5, 4.0, -4.0),
-    //     vec3(0.0, 4.0, -4.0),
-    //     vec3(3.5, 4.0, -4.0),
-    // };
-
     // Vertices coordinates
-    GLfloat vertices[] =
-        {
-            -0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,  // Lower left corner
-            0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,   // Lower right corner
-            0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f // Upper corner
-        };
+    vec3 buffer_data[3] = {
+        vec3(-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f),
+        vec3(0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f),
+        vec3(0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f),
+    };
 
     // Create reference containers for the Vartex Array Object and the Vertex Buffer Object
     GLuint VAO, VBO;
@@ -129,7 +125,7 @@ int main()
     // Bind the VBO specifying it's a GL_ARRAY_BUFFER
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // Introduce the vertices into the VBO
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(buffer_data), buffer_data, GL_STATIC_DRAW);
 
     // printf("size of vertices: %lu\n", sizeof(vertices));
     // printf("size of buffer_data: %lu\n", sizeof(buffer_data));
