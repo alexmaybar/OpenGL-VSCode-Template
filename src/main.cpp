@@ -1,6 +1,6 @@
 #include <iostream>
 #include <math.h>
-#include <GLAD/glad.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <GLM/common.hpp>
 #include <GLM/vec3.hpp>
