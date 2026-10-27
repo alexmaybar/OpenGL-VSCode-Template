@@ -2,23 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: g++.exe build active file",
-            "command": "C:\\MinGW\\bin\\g++.exe",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "-std=c++17",
-                "-I${workspaceFolder}/include",
-                "-L${workspaceFolder}/lib",
-                "${workspaceFolder}/src/*.cpp",
-                "${workspaceFolder}/src/glad.c",
-                "-lglfw3dll",
-                "-o",
-                "${workspaceFolder}/cutable.exe"
-            ],
+            "label": "make",
+            "type": "shell",
+            "command": "make",
+            "args": ["-j"],
             "options": {
-                "cwd": "${workspaceFolder}/src"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
@@ -27,7 +16,30 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "The Correct Task"
+            "detail": "Build with Makefile (Linux)"
+        },
+        {
+            "label": "make clean",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "detail": "Remove build artifacts"
+        },
+        {
+            "label": "make run",
+            "type": "shell",
+            "command": "make",
+            "args": ["run"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "dependsOn": [],
+            "detail": "Build and run (cwd = src for shaders)"
         }
     ]
 }

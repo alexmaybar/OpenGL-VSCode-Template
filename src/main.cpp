@@ -3,7 +3,6 @@
 #include <glad/glad.h>
 #include <vector>
 
-#include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <GLM/common.hpp>
